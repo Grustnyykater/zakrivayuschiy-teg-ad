@@ -8,6 +8,34 @@
 Если эти классы поменять в HTML, скрипт перестанет работать. Будьте аккуратны.
 */
 
+// Предотвращаем перезагрузку страницы для всех кнопок в формах
+document.addEventListener('DOMContentLoaded', () => {
+  // Блокируем все кнопки submit в формах
+  document.querySelectorAll('form button, form input[type="submit"]').forEach(button => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+    });
+  });
+  
+  // Блокируем кнопки без type (по умолчанию submit)
+  document.querySelectorAll('form button:not([type])').forEach(button => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+    });
+  });
+  
+  // Специально для кнопок "Сохранить на память" и "ОК"
+  document.querySelectorAll('button').forEach(button => {
+    const text = button.textContent || button.innerText;
+    if (text.includes('Сохранить') || text.includes('на память') || text.includes('ОК')) {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+      });
+    }
+  });
+});
+
+// Код лайков с исправлениями
 const likeHeartArray = document.querySelectorAll('.like-icon');
 const likeButtonArray = document.querySelectorAll('.card__like-button');
 const iconButtonArray = document.querySelectorAll('.card__icon-button');
