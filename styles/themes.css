@@ -1,0 +1,55 @@
+@media (prefers-color-scheme: light) {
+    :root {
+        --background-color: #FFF;
+        --text-color: #000;
+        --gradient-color-first: #d3d3d3;
+        --gradient-color-second: #e7e7e7;
+        --gradient-color-third: #1a1a1a;
+        --difference-background-color: #fff;
+        --difference-text-color: #fff;
+        --contour-color: #000;
+        --slim-font-weight: 400;
+        --bold-font-weight: 700;
+    }
+}
+
+:root.theme-light {
+    --background-color: #FFF;
+    --text-color: #000;
+    --gradient-color-first: #d3d3d3;
+    --gradient-color-second: #e7e7e7;
+    --gradient-color-third: #1a1a1a;
+    --difference-background-color: #fff;
+    --difference-text-color: #fff;
+    --contour-color: #000;
+    --slim-font-weight: 400;
+    --bold-font-weight: 700;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #000;
+        --text-color: #00CC14;
+        --gradient-color-first: #000;
+        --gradient-color-second: #007f0c;
+        --gradient-color-third: #004306;
+        --difference-background-color: #00CC14;
+        --difference-text-color: #00CC14;
+        --contour-color: #00CC14;
+        --slim-font-weight: 465;
+        --bold-font-weight: 785;
+    }
+}
+
+:root.theme-dark {
+    --background-color: #000;
+    --text-color: #00CC14;
+    --gradient-color-first: #000;
+    --gradient-color-second: #007f0c;
+    --gradient-color-third: #004306;
+    --difference-background-color: #00CC14;
+    --difference-text-color: #00CC14;
+    --contour-color: #00CC14;
+    --slim-font-weight: 465;
+    --bold-font-weight: 785;
+}
