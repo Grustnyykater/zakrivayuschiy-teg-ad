@@ -8,50 +8,43 @@
 Если эти классы поменять в HTML, скрипт перестанет работать. Будьте аккуратны.
 */
 
-// Предотвращаем перезагрузку страницы для всех кнопок в формах
-document.addEventListener('DOMContentLoaded', () => {
-  // Блокируем все кнопки submit в формах
-  document.querySelectorAll('form button, form input[type="submit"]').forEach(button => {
-    button.addEventListener('click', (event) => {
+// Блокируем перезагрузку для ФОРМ (самый надежный способ)
+document.addEventListener('DOMContentLoaded', function() {
+  // Блокируем ВСЕ формы на странице
+  document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', function(event) {
       event.preventDefault();
     });
   });
   
-  // Блокируем кнопки без type (по умолчанию submit)
-  document.querySelectorAll('form button:not([type])').forEach(button => {
-    button.addEventListener('click', (event) => {
-      event.preventDefault();
-    });
-  });
-  
-  // Специально для кнопок "Сохранить на память" и "ОК"
+  // Дополнительно блокируем кнопки "Сохранить на память" и "ОК"
   document.querySelectorAll('button').forEach(button => {
-    const text = button.textContent || button.innerText;
-    if (text.includes('Сохранить') || text.includes('на память') || text.includes('ОК')) {
-      button.addEventListener('click', (event) => {
+    const text = button.textContent.trim();
+    if (text.includes('Сохранить на память') || text.includes('ОК')) {
+      button.addEventListener('click', function(event) {
         event.preventDefault();
       });
     }
   });
 });
 
-// Код лайков с исправлениями
+// Код лайков (исправленный)
 const likeHeartArray = document.querySelectorAll('.like-icon');
 const likeButtonArray = document.querySelectorAll('.card__like-button');
 const iconButtonArray = document.querySelectorAll('.card__icon-button');
 
 iconButtonArray.forEach((iconButton, index) => {
-  iconButton.onclick = (event) => {
+  iconButton.addEventListener('click', function(event) {
     event.preventDefault();
     toggleIsLiked(likeHeartArray[index], likeButtonArray[index]);
-  };
+  });
 });
 
 likeButtonArray.forEach((button, index) => {
-  button.onclick = (event) => {
+  button.addEventListener('click', function(event) {
     event.preventDefault();
     toggleIsLiked(likeHeartArray[index], button);
-  };
+  });
 });
 
 function toggleIsLiked(heart, button) {
@@ -61,14 +54,12 @@ function toggleIsLiked(heart, button) {
 
 function setButtonText(heart, button) {
   if ([...heart.classList].includes('is-liked')) {
-    setTimeout(
-      () => (button.querySelector('.button__text').textContent = 'Unlike'),
-      500
-    );
+    setTimeout(() => {
+      button.querySelector('.button__text').textContent = 'Unlike';
+    }, 500);
   } else {
-    setTimeout(
-      () => (button.querySelector('.button__text').textContent = 'Like'),
-      500
-    );
+    setTimeout(() => {
+      button.querySelector('.button__text').textContent = 'Like';
+    }, 500);
   }
 }
