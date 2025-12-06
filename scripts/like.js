@@ -8,43 +8,17 @@
 Если эти классы поменять в HTML, скрипт перестанет работать. Будьте аккуратны.
 */
 
-// Блокируем перезагрузку для ФОРМ (самый надежный способ)
-document.addEventListener('DOMContentLoaded', function() {
-  // Блокируем ВСЕ формы на странице
-  document.querySelectorAll('form').forEach(form => {
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
-    });
-  });
-  
-  // Дополнительно блокируем кнопки "Сохранить на память" и "ОК"
-  document.querySelectorAll('button').forEach(button => {
-    const text = button.textContent.trim();
-    if (text.includes('Сохранить на память') || text.includes('ОК')) {
-      button.addEventListener('click', function(event) {
-        event.preventDefault();
-      });
-    }
-  });
-});
-
-// Код лайков (исправленный)
 const likeHeartArray = document.querySelectorAll('.like-icon');
 const likeButtonArray = document.querySelectorAll('.card__like-button');
 const iconButtonArray = document.querySelectorAll('.card__icon-button');
 
 iconButtonArray.forEach((iconButton, index) => {
-  iconButton.addEventListener('click', function(event) {
-    event.preventDefault();
+  iconButton.onclick = () =>
     toggleIsLiked(likeHeartArray[index], likeButtonArray[index]);
-  });
 });
 
 likeButtonArray.forEach((button, index) => {
-  button.addEventListener('click', function(event) {
-    event.preventDefault();
-    toggleIsLiked(likeHeartArray[index], button);
-  });
+  button.onclick = () => toggleIsLiked(likeHeartArray[index], button);
 });
 
 function toggleIsLiked(heart, button) {
@@ -54,12 +28,14 @@ function toggleIsLiked(heart, button) {
 
 function setButtonText(heart, button) {
   if ([...heart.classList].includes('is-liked')) {
-    setTimeout(() => {
-      button.querySelector('.button__text').textContent = 'Unlike';
-    }, 500);
+    setTimeout(
+      () => (button.querySelector('.button__text').textContent = 'Unlike'),
+      500
+    );
   } else {
-    setTimeout(() => {
-      button.querySelector('.button__text').textContent = 'Like';
-    }, 500);
+    setTimeout(
+      () => (button.querySelector('.button__text').textContent = 'Like'),
+      500
+    );
   }
 }
