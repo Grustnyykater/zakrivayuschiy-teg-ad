@@ -1,28 +1,292 @@
+/* Здесь вы напишете основную часть стилей страницы.
+Будьте внимательны! Для корректной работы скриптов на этом сайте нужно, чтобы в HTML некоторые классы были названы особым образом:
+✦ like-icon — для svg-иконки анимированного сердца
+✦ card__like-button — для кнопки Like рядом с иконкой
+✦ card__icon-button — для кнопки, оборачивающей иконку
+✦ card__icon-button — для кнопки, оборачивающей иконку
+✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
+✦ button__text — для обозначения текстового элемента внутри кнопки
+*/
+
 .page {
-  font-family: Arial, sans-serif;
-  padding: 20px;
+  font-family: var(--main-font);
+  background-image: var(--background-color);
+  background-size: cover;
+  background-attachment: fixed;
+  min-inline-size: 320px;
+  min-block-size: 100dvb;
+  font-variation-settings: "wght" var(--font-weight-regular);
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.header__wrapper {
+  margin: 100px 0;
+  border: 2px solid var(--Themes-mainColor, #000000);
+  color: var(--Themes-mainColor, #000000);
+  font-family: var(--accent-font);
+  text-align: center;
+  background-color: var(--Themes-background, #ffffff);
+  inline-size: clamp(23.438rem, 17.634rem + 29.018vi, 43.75rem);
+  block-size: clamp(20.438rem, 19.705rem + 3.661vi, 23rem);
+}
+
+.header__title {
+  padding-top: clamp(7.5rem, 7rem + 1.6vi, 8rem);
+  font-size: clamp(3.063rem, 2.063rem + 3.2vi, 4.063rem);
+  text-transform: uppercase;
+}
+
+.header__subtitle {
+  padding-top: 20px;
+  font-size: clamp(0.875rem, 0.313rem + 1.8vi, 1.438rem);
+  text-transform: uppercase;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 53px;
+  padding-bottom: 103px;
+}
+
+.cards__list {
+  display: grid;
+  gap: 51px;
+}
+
+.card {
+  border: 2px solid var(--Themes-mainColor, #000000);
+}
+
+.card__item {
+  background-color: var(--Themes-background, #ffffff);
+  max-inline-size: 696px;
+}
+
+.card__title {
+  border-bottom: 2px solid var(--Themes-mainColor, #000000);
+  padding: 5px 10px;
+  font-size: 18px;
+  line-height: 21.78px;
+  font-variation-settings: "wght" var(--font-weight-bold);
+}
+
+.image__wrapper {
+  position: relative;
+}
+
+.card__image {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  aspect-ratio: 1 / 1;
+  inline-size: 100%;
+}
+
+.label__text {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  color: var(--Themes-mainColor, #000000);
+  font-family: var(--accent-font);
+  font-size: 14px;
+  text-shadow: -1px 0 var(--Themes-background, #ffffff),
+    0 1px var(--Themes-background, #ffffff),
+    1px 0 var(--Themes-background, #ffffff),
+    0 -1px var(--Themes-background, #ffffff);
+  mix-blend-mode: hard-light;
+}
+
+@supports (text-stroke: 1px var(--Themes-background, #ffffff)) or
+  (-webkit-text-stroke: 1px var(--Themes-background, #ffffff)) {
+  .label_text {
+    text-shadow: none;
+    text-stoke: 1px var(--Themes-background, #ffffff);
+    -webkit-text-stroke: 1px var(--Themes-background, #ffffff);
+  }
+}
+
+.card__text-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 27px;
+  border-top: 2px solid var(--Themes-mainColor, #000000);
+  padding: 25px;
+}
+
+.card__text {
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.card__buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  gap: 5px;
+  padding: 0 25px 25px 0;
+}
+
+.card__icon-button {
+  border: 2px solid transparent;
+  padding: 0;
+  background-color: inherit;
+  cursor: pointer;
+  block-size: 36px;
+}
+
+.card__like-button {
+  padding: 8px 0px;
+  inline-size: 130px;
+}
+
+.button__text {
+  position: relative;
+  z-index: 1;
+  color: var(--Themes-background, #ffffff);
+  font-size: 14px;
+  mix-blend-mode: difference;
+}
+
+.button__popup-open {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  padding: 14px 20px;
+  font-size: 14px;
+  line-height: 12.6px;
 }
 
 .button {
+  position: relative;
+  border: 2px solid var(--Themes-mainColor, #000000);
+  overflow: hidden;
+  font-family: var(--accent-font);
+  background-color: var(--Themes-background, #ffffff);
   cursor: pointer;
 }
 
-.like-icon {
-  fill: transparent;
-  stroke: black;
-  transition: fill 0.3s;
-}
-
-.like-icon.is-liked {
-  fill: red;
-}
-
-.popup {
-  padding: 20px;
-  border: none;
-  border-radius: 8px;
+.button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--Themes-mainColor, #000000);
+  transition: 0.5s ease-in-out;
+  transform: translateX(-100%);
+  inline-size: 100%;
+  block-size: 100%;
 }
 
 .popup::backdrop {
-  background: rgba(0, 0, 0, 0.4);
+  opacity: 0.75;
+  background-color: var(--Themes-mainColor, #000000);
+}
+
+.popup[open] {
+  display: flex;
+}
+
+.popup {
+  flex-direction: column;
+  gap: 30px;
+  padding: 30px 27px;
+  inline-size: clamp(21.313rem, 21.098rem + 1.071vi, 22.063rem);
+}
+
+.popup__text-open {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.floppy {
+  flex-shrink: 0;
+}
+
+.icon-floppy {
+  color: var(--Themes-background, #ffffff);
+  mix-blend-mode: difference;
+}
+
+.text__popup {
+  font-family: var(--accent-font);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: uppercase;
+}
+
+.button__popup-close {
+  padding: 10px 0;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.filter__blur {
+  filter: blur(3px);
+}
+
+.filter__brightness {
+  filter: brightness(130%);
+}
+
+.filter__contrast {
+  filter: contrast(150%);
+}
+
+.filter__sepia {
+  filter: sepia(0.5);
+}
+
+.filter__grayscale {
+  filter: grayscale(80%);
+}
+
+.filter__hue-rotate {
+  filter: hue-rotate(150deg);
+}
+
+.filter__invert {
+  filter: invert(90%);
+}
+
+.filter__mix {
+  filter: saturate(390%) contrast(190%) hue-rotate(200deg);
+}
+
+@media (width <= 375px) {
+  .header-mobile {
+    inline-size: 100%;
+  }
+
+  .card__item {
+    inline-size: 100%;
+  }
+
+  .button__popup-open {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .icon-floppy {
+    inline-size: 28px;
+    block-size: 28px;
+  }
+
+  .label__text {
+    top: 19px;
+    right: 10px;
+  }
 }
