@@ -21,4 +21,4 @@ jobs:
       #   with:
       #     project: 'zakrivayuschiy-teg-ad'
       - name: Tests
-        run: echo "Никаких ошибок :)"
+        run: echo "Когда поднимаешься в лифте, подними сжатый кулак вверх, и побудь суперменом!"
