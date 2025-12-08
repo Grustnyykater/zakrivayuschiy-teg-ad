@@ -25,8 +25,6 @@ document.addEventListener("submit", (event) => {
   event.preventDefault();
 });
 
-// === ЛАЙКИ ===
-
 const likeHeartArray = document.querySelectorAll(".like-icon");
 const likeButtonArray = document.querySelectorAll(".card__like-button");
 const iconButtonArray = document.querySelectorAll(".card__icon-button");
